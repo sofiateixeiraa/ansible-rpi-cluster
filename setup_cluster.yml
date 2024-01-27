@@ -1,0 +1,14 @@
+- hosts: pis
+  become: yes
+  roles:
+    - docker-installation
+
+- hosts: master
+  become: yes
+  roles:
+    - kubernetes-setup
+
+- hosts: master
+  become: yes
+  roles:
+    - prometheus-deployment

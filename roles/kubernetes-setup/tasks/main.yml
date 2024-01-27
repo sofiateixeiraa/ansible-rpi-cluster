@@ -1,0 +1,17 @@
+- name: Install K3s on Master
+  shell: curl -sfL https://get.k3s.io | sh -
+  args:
+    executable: /bin/bash
+  when: "'master' in group_names"
+
+- name: Get K3s Token
+  command: cat /var/lib/rancher/k3s/server/node-token
+  register: k3s_token
+  when: "'master' in group_names"
+
+- name: Join K3s Cluster
+  shell: |
+    curl -sfL https://get.k3s.io | K3S_URL=https://192.168.86.101:6443 K3S_TOKEN={{ hostvars['192.168.86.101']['k3s_token'].stdout }} sh -
+  args:
+    executable: /bin/bash
+  when: "'master' not in group_names"

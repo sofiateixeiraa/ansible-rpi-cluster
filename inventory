@@ -1,0 +1,7 @@
+[pis]
+[IP] ansible_user=pi
+[IP] ansible_user=pi
+[IP] ansible_user=pi
+
+[master]
+[IP] ansible_user=pi
